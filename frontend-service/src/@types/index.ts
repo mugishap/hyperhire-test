@@ -2,6 +2,6 @@ export interface Book {
   title: string;
   description: string;
   discountRate: number;
-  coverImageUrl: string;
+  coverImage: string;
   price: number;
 }

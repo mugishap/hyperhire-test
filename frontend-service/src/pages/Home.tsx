@@ -17,7 +17,6 @@ const Home = () => {
       setBooks(
         books.concat(
           data.data.books,
-          // .map((el) => ({ ...el, coverImage: el.coverImageURL }))
         ),
       );
     } catch (e) {

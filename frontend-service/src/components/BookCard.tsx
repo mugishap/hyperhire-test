@@ -3,7 +3,7 @@ import { Book } from '../@types';
 
 interface BookCardProps extends Book {}
 
-const BookCard = ({ coverImageUrl: coverImage, discountRate, price, title }: BookCardProps) => {
+const BookCard = ({ coverImage, discountRate, price, title }: BookCardProps) => {
   return (
     <div className="w-[187px] flex-grow max-w-[378px] cursor-pointer hover:bg-slate-100">
       <img src={coverImage} alt={title} className="object-cover w-full aspect-square" />
