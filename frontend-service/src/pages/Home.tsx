@@ -3,15 +3,21 @@ import BookCard from '../components/BookCard';
 import { Book } from '../@types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { axios } from '../utils/axios.interceptor';
+import { useScreenSize } from '../hooks/useScreenSize';
 
 const Home = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const { width: screenWidth } = useScreenSize();
+
+  const limit: number = Math.floor(screenWidth / 187) * 3;
 
   const fetchBooks = async (abortController?: AbortController) => {
     try {
-      const { data } = await axios.get(`/book/all?page=${currentPage}&limit=20`, { signal: abortController?.signal });
+      const { data } = await axios.get(`/book/all?page=${currentPage}&limit=${limit}`, {
+        signal: abortController?.signal,
+      });
       if (!data.success) throw new Error(data.message);
       if (data.data.totalCount === 0) setHasMore(false);
       setBooks(books.concat(data.data.books));
@@ -51,7 +57,7 @@ const Home = () => {
         pullDownToRefreshContent={<h3 className="text-bold text-slate-500 text-center w-full">&#8595;</h3>}
         releaseToRefreshContent={<h3 className="text-bold text-slate-500 text-center w-full">&#8593;</h3>}
         // endMessage={<h4 className="text-bold text-slate-500 text-center w-full"></h4>}
-        className="books flex gap-1 flex-wrap justify-items-stretch lg:px-2">
+        className="books flex gap-1 flex-wrap justify-items-stretch lg:px-2 pb-10">
         {books.map((book, index) => {
           return <BookCard key={index} {...book} discountRate={index + 1} />;
         })}

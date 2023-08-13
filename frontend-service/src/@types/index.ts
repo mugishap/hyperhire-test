@@ -5,3 +5,7 @@ export interface Book {
   coverImage: string;
   price: number;
 }
+export interface ScreenSize {
+  height: number;
+  width: number;
+}
