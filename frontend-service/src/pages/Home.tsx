@@ -15,9 +15,7 @@ const Home = () => {
       if (!data.success) throw new Error(data.message);
       if (data.data.totalCount === 0) setHasMore(false);
       setBooks(
-        books.concat(
-          data.data.books,
-        ),
+        books.concat(data.data.books),
       );
     } catch (e) {
       console.error(e);
