@@ -14,9 +14,7 @@ const Home = () => {
       const { data } = await axios.get(`/book/all?page=${currentPage}&limit=20`, { signal: abortController?.signal });
       if (!data.success) throw new Error(data.message);
       if (data.data.totalCount === 0) setHasMore(false);
-      setBooks(
-        books.concat(data.data.books),
-      );
+      setBooks(books.concat(data.data.books));
     } catch (e) {
       console.error(e);
     }
